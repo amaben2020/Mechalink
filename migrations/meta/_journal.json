@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1727283667321,
+      "tag": "0000_faulty_bloodaxe",
+      "breakpoints": true
+    }
+  ]
+}

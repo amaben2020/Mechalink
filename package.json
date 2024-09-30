@@ -1,0 +1,28 @@
+{
+  "name": "oga-mechanic-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "db": "sst shell drizzle-kit",
+    "db:studio": "sst shell drizzle-kit studio",
+    "dev": "sst dev",
+    "start": "sst dev",
+    "deploy": "sst deploy --stage production",
+    "refresh": "sst refresh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.658.1",
+    "@aws-sdk/client-rds-data": "^3.658.0",
+    "@aws-sdk/lib-dynamodb": "^3.658.1",
+    "drizzle-kit": "^0.24.2",
+    "drizzle-orm": "^0.33.0",
+    "sst": "3.1.38"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.145"
+  }
+}
