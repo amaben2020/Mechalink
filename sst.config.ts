@@ -23,16 +23,3 @@ export default $config({
     };
   },
 });
-
-//  const api = new sst.aws.ApiGatewayV2('MyApi', {
-//    cors: false,
-//    transform: {
-//      route: {
-//        handler: {
-//          link: [rds],
-//        },
-//      },
-//    },
-//  });
-
-//  api.route('GET /todos', 'packages/functions/src/todos/list.main');
