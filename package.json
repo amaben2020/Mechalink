@@ -9,8 +9,7 @@
     "start": "sst dev",
     "deploy": "sst deploy --stage production",
     "refresh": "sst refresh",
-    "test": "sst bind vitest run",
-    "test:backend": "npm test packages/core"
+    "test": "sst shell vitest"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +21,8 @@
     "@aws-sdk/lib-dynamodb": "^3.658.1",
     "drizzle-kit": "^0.24.2",
     "drizzle-orm": "^0.33.0",
-    "sst": "3.1.38"
+    "sst": "3.1.38",
+    "vitest": "^2.1.1"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.145"
