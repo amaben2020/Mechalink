@@ -8,7 +8,8 @@
     "dev": "sst dev",
     "start": "sst dev",
     "deploy": "sst deploy --stage production",
-    "refresh": "sst refresh"
+    "refresh": "sst refresh",
+    "test": "npm test"
   },
   "keywords": [],
   "author": "",
