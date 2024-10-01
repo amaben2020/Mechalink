@@ -9,7 +9,8 @@
     "start": "sst dev",
     "deploy": "sst deploy --stage production",
     "refresh": "sst refresh",
-    "test": "npm test"
+    "test": "sst bind vitest run",
+    "test:backend": "npm test packages/core"
   },
   "keywords": [],
   "author": "",
