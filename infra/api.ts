@@ -12,4 +12,4 @@ export const api = new sst.aws.ApiGatewayV2('Api', {
     },
   },
 });
-api.route('GET /todos', 'packages/functions/src/todos/list.main');
+api.route('GET /jobs', 'packages/functions/src/jobs/list.main');

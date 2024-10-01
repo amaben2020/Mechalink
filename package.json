@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "db": "sst shell drizzle-kit",
+    "db:generate": "sst shell drizzle-kit generate",
+    "db:migrate": "sst shell drizzle-kit migrate",
     "db:studio": "sst shell drizzle-kit studio",
     "dev": "sst dev",
     "start": "sst dev",
@@ -21,6 +22,7 @@
     "@aws-sdk/lib-dynamodb": "^3.658.1",
     "drizzle-kit": "^0.24.2",
     "drizzle-orm": "^0.33.0",
+    "jsonwebtoken": "^9.0.2",
     "sst": "3.1.38",
     "vitest": "^2.1.1"
   },
