@@ -2,13 +2,19 @@ import { Context, APIGatewayProxyEvent } from 'aws-lambda';
 
 export module Util {
   export function handler(
-    lambda: (evt: APIGatewayProxyEvent, context: Context) => Promise<any>
+    lambda: (
+      evt: APIGatewayProxyEvent,
+      context: Context
+    ) => Promise<{
+      body: any;
+    }>
   ) {
     return async function (event: APIGatewayProxyEvent, context: Context) {
-      let body: string, statusCode: number;
+      let body: any, statusCode: number;
       try {
         // Run the Lambda
         body = await lambda(event, context);
+
         statusCode = 200;
       } catch (error) {
         statusCode = 500;
@@ -18,7 +24,7 @@ export module Util {
       }
       // Return HTTP response
       return {
-        body,
+        body: JSON.stringify(body),
         statusCode,
         headers: {
           'Access-Control-Allow-Origin': '*',

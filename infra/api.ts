@@ -1,5 +1,5 @@
-import { db } from '../packages/src/drizzle';
-
+const vpc = new sst.aws.Vpc('MyVpc');
+const rds = new sst.aws.Postgres('MyPostgres', { vpc });
 export const api = new sst.aws.ApiGatewayV2('Api', {
   cors: {
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -7,7 +7,7 @@ export const api = new sst.aws.ApiGatewayV2('Api', {
   transform: {
     route: {
       handler: {
-        link: [db],
+        link: [rds],
       },
     },
   },
