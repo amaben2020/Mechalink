@@ -19,7 +19,7 @@ export const UserSchema = z
   });
 
 export const Users = {
-  method: 'list',
+  method: 'get',
   path: '/jobs',
   summary: 'Get a single user',
   // TODO: remove this for single GET
