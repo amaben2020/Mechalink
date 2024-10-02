@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: My API
-  description: This is the API
+  title: Mechalink Api
+  description: Connecting clients with mechanics
 servers:
-  - url: https://1npaj0q9ug.execute-api.eu-west-1.amazonaws.com/jobs
+  - url: https://1npaj0q9ug.execute-api.eu-west-1.amazonaws.com
 components:
   schemas: {}
   parameters: {}

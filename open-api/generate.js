@@ -30,12 +30,10 @@ const openApiDocument = generator.generateDocument({
   openapi: '3.0.0',
   info: {
     version: '1.0.0',
-    title: 'My API',
-    description: 'This is the API',
+    title: 'Mechalink Api',
+    description: 'Connecting clients with mechanics',
   },
-  servers: [
-    { url: 'https://1npaj0q9ug.execute-api.eu-west-1.amazonaws.com/jobs' },
-  ],
+  servers: [{ url: 'https://1npaj0q9ug.execute-api.eu-west-1.amazonaws.com' }],
 });
 
 const app = express();
@@ -59,7 +57,7 @@ app.use('/', express.static('static'));
 
 // we could look at how to do this on each git push using vercel
 app.use(
-  '/',
+  '/docs',
   swaggerUi.serve,
   swaggerUi.setup(doc, {
     swaggerOptions: {
@@ -75,3 +73,23 @@ app.use(
 // app.listen(PORT, () => {
 //   console.log(`Server is running on http://localhost:${PORT}`);
 // });
+
+let _handler;
+
+// AWS Lambda handler
+const handler = async (event, context) => {
+  return async () => {
+    if (!_handler) {
+      _handler = serverless(app, {
+        provider: 'aws',
+        request: (request) => {
+          request.serverless = { event, context };
+        },
+      });
+    }
+
+    return await _handler(event, context);
+  };
+};
+
+module.exports.handler = handler;
