@@ -2,6 +2,12 @@
   "name": "oga-mechanic-app",
   "version": "1.0.0",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged ts-node ./open-api/out/generate.js > open-api.yaml",
+      "pre-push": "ts-node ./open-api/out/generate.js > open-api.yaml"
+    }
+  },
   "scripts": {
     "db:generate": "sst shell drizzle-kit generate",
     "db:migrate": "sst shell drizzle-kit migrate",
@@ -13,8 +19,7 @@
     "test": "sst shell vitest",
     "prepare": "husky install",
     "gen": "ts-node index.ts",
-    "gen-openapi": "ts-node ./open-api/index.ts > openapi.yaml",
-    "gen-sdk": "speakeasy generate sdk --schema openapi.yaml --lang python --out ./sdk"
+    "gen:openapi": "ts-node ./open-api/out/generate.js > open-api.yaml"
   },
   "keywords": [],
   "author": "",
