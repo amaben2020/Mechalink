@@ -10,23 +10,37 @@
     "start": "sst dev",
     "deploy": "sst deploy --stage production",
     "refresh": "sst refresh",
-    "test": "sst shell vitest"
+    "test": "sst shell vitest",
+    "prepare": "husky install",
+    "gen": "ts-node index.ts",
+    "gen-openapi": "ts-node ./open-api/index.ts > openapi.yaml",
+    "gen-sdk": "speakeasy generate sdk --schema openapi.yaml --lang python --out ./sdk"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.1.2",
     "@aws-sdk/client-dynamodb": "^3.658.1",
     "@aws-sdk/client-rds-data": "^3.658.0",
     "@aws-sdk/lib-dynamodb": "^3.658.1",
+    "axios": "^1.7.7",
     "drizzle-kit": "^0.24.2",
     "drizzle-orm": "^0.33.0",
+    "express": "^4.21.0",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "sst": "3.1.38",
-    "vitest": "^2.1.1"
+    "swagger-ui-express": "^5.0.1",
+    "vitest": "^2.1.1",
+    "yaml": "^2.5.1",
+    "yamljs": "^0.3.0",
+    "zod": "^3.23.8",
+    "zod-openapi": "^3.0.1"
   },
   "devDependencies": {
-    "@types/aws-lambda": "8.10.145"
+    "@types/aws-lambda": "8.10.145",
+    "husky": "^9.1.6"
   }
 }
