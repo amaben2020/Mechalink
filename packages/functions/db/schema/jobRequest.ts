@@ -6,7 +6,6 @@ import {
   pgTable,
   varchar,
   timestamp,
-  integer,
   bigint,
 } from 'drizzle-orm/pg-core';
 import { jobs } from './job';
@@ -34,7 +33,7 @@ export const jobRequests = pgTable('jobRequests', {
 // a job can have many requests, only one mechanic can be added to a jobRequest
 export const jobRequestRelations = relations(jobRequests, ({ one }) => ({
   job: one(jobs, {
-    fields: [jobRequests.jobId], // field on the table
-    references: [jobs.id], // field on the referenced table
+    fields: [jobRequests.jobId],
+    references: [jobs.id],
   }),
 }));

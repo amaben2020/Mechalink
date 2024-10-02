@@ -12,10 +12,7 @@
     "refresh": "sst refresh",
     "test": "sst shell vitest",
     "prepare": "husky install",
-    "gen": "ts-node index.ts",
-    "gen:openapi": "ts-node ./open-api/out/generate.js > open-api.yaml",
-    "precommit": "npm run lint",
-    "lint": "eslint src --ext .ts"
+    "gen:openapi": "npx ts-node ./open-api/generate.js"
   },
   "lint-staged": {
     "*.{js,ts}": [

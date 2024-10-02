@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const express = require('express');
 const { z } = require('zod');
 const { extendZodWithOpenApi } = require('@asteasolutions/zod-to-openapi');
@@ -9,7 +11,7 @@ const path = require('path');
 const { stringify } = require('yaml');
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
 const { Users } = require('../packages/functions/src/jobs/open-api');
 extendZodWithOpenApi(z);
 
@@ -38,10 +40,19 @@ const openApiDocument = generator.generateDocument({
 
 const app = express();
 
-writeFileSync('./out/open-api.yaml', stringify(openApiDocument));
+// Create 'out' directory if it doesn't exist
+const outputDir = path.join(__dirname, './out');
+if (!existsSync(outputDir)) {
+  mkdirSync(outputDir);
+}
+
+writeFileSync(
+  path.join(outputDir, 'open-api.yaml'),
+  stringify(openApiDocument)
+);
 
 const doc = yaml.load(
-  readFileSync(path.resolve(__dirname, './out/open-api.yaml'), 'utf-8')
+  readFileSync(path.resolve(outputDir, 'open-api.yaml'), 'utf-8')
 );
 
 app.use('/', express.static('static'));
@@ -59,8 +70,8 @@ app.use(
   })
 );
 
-const PORT = 8080;
+// const PORT = 8080;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
