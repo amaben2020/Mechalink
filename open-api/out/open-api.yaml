@@ -6,39 +6,7 @@ info:
 servers:
   - url: http://localhost:3000
 components:
-  schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          example: "1212121"
-        name:
-          type: string
-          example: John Doe
-        age:
-          type: number
-          example: 42
-      required:
-        - id
-        - name
-        - age
-    User2:
-      type: object
-      properties:
-        id:
-          type: string
-          example: "1212121"
-        name:
-          type: string
-          example: John Doe
-        age:
-          type: number
-          example: 42
-      required:
-        - id
-        - name
-        - age
+  schemas: {}
   parameters: {}
 paths:
   /users/{id}:
@@ -56,20 +24,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-  /users:
-    get:
-      summary: Get a single user
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: id
-          in: path
-      responses:
-        "204":
-          description: Object with user data 2.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User2"
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  age:
+                    type: number
+                required:
+                  - id
+                  - name
+                  - age
+                example:
+                  name: "1212121"
+                  id: "1"
+                  age: 1

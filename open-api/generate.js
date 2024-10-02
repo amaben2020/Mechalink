@@ -1,5 +1,4 @@
 const express = require('express');
-const { json } = require('express');
 const { z } = require('zod');
 const { extendZodWithOpenApi } = require('@asteasolutions/zod-to-openapi');
 const {
@@ -11,22 +10,20 @@ const { stringify } = require('yaml');
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
 const { readFileSync, writeFileSync } = require('fs');
-const { Users, Users2 } = require('../packages/functions/src/jobs/open-api');
+const { Users } = require('../packages/functions/src/jobs/open-api');
 extendZodWithOpenApi(z);
 
 const registry = new OpenAPIRegistry();
 
-// all schemas in the app goes here
-const schemas = [Users, Users2];
+// all schema definitions in the app goes here
+const schemas = [Users];
 
 schemas.forEach((schema) => {
   registry.registerPath(schema);
 });
 
-// Create an OpenAPI document generator
 const generator = new OpenApiGeneratorV3(registry.definitions);
 
-// Generate the OpenAPI document
 const openApiDocument = generator.generateDocument({
   openapi: '3.0.0',
   info: {
@@ -37,17 +34,17 @@ const openApiDocument = generator.generateDocument({
   servers: [{ url: 'http://localhost:3000' }],
 });
 
-// Write the generated OpenAPI document to a YAML file
+const app = express();
+
 writeFileSync('./out/open-api.yaml', stringify(openApiDocument));
 
 const doc = yaml.load(
   readFileSync(path.resolve(__dirname, './out/open-api.yaml'), 'utf-8')
 );
 
-const app = express();
-
 app.use('/', express.static('static'));
 
+// we could look at how to do this on each git push using vercel
 app.use(
   '/',
   swaggerUi.serve,
@@ -60,7 +57,6 @@ app.use(
   })
 );
 
-// Start the server
 const PORT = 8080;
 
 app.listen(PORT, () => {
