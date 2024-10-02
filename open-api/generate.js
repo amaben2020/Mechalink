@@ -31,7 +31,9 @@ const openApiDocument = generator.generateDocument({
     title: 'My API',
     description: 'This is the API',
   },
-  servers: [{ url: 'http://localhost:3000' }],
+  servers: [
+    { url: 'https://1npaj0q9ug.execute-api.eu-west-1.amazonaws.com/jobs' },
+  ],
 });
 
 const app = express();

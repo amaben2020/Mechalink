@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 extendZodWithOpenApi(z);
 
+const PATH = '/jobs';
+
 export const UserSchema = z
   .object({
     id: z.string(),
@@ -17,9 +19,10 @@ export const UserSchema = z
   });
 
 export const Users = {
-  method: 'get',
-  path: '/users/{id}',
+  method: 'list',
+  path: '/jobs',
   summary: 'Get a single user',
+  // TODO: remove this for single GET
   request: {
     params: z.object({ id: z.string() }),
   },
