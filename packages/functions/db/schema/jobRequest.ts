@@ -7,8 +7,10 @@ import {
   varchar,
   timestamp,
   bigint,
+  integer,
 } from 'drizzle-orm/pg-core';
 import { jobs } from './job';
+import { mechanics } from './mechanic';
 
 export const jobRequests = pgTable('jobRequests', {
   id: serial('id').primaryKey(),
@@ -21,11 +23,11 @@ export const jobRequests = pgTable('jobRequests', {
   status: varchar('status', {
     enum: Object.values(JobRequestStatuses) as [string, ...string[]],
     length: 256,
-  }),
+  }).default(JobRequestStatuses.NOTIFYING),
   jobId: bigint('job_id', { mode: 'number' })
     .references(() => jobs.id)
     .notNull(),
-  mechanicId: varchar('mechanic_id', { length: 256 }),
+  mechanicId: integer('mechanic_id').references(() => mechanics.id),
   distance: text('distance'),
   duration: text('duration'),
 });
@@ -35,5 +37,10 @@ export const jobRequestRelations = relations(jobRequests, ({ one }) => ({
   job: one(jobs, {
     fields: [jobRequests.jobId],
     references: [jobs.id],
+  }),
+
+  mechanic: one(mechanics, {
+    fields: [jobRequests.mechanicId],
+    references: [mechanics.id],
   }),
 }));
